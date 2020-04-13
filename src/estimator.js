@@ -1,14 +1,14 @@
 const submit = document.getElementById('submit');
 
 submit.addEventListener('click', function () {
-    const population = document.getElementById('population').value;
-    const reportedCases = document.getElementById('reported-cases').value;
-    const beds = document.getElementById('beds').value;
-    const timeToElapse = document.getElementById('time-to-elapse').value;
-    const periods = document.getElementById('period').value;
-    const avgI = document.getElementById('average-daily-income').value;
-    const avgIP = document.getElementById('average-daily-income-population').value;
-    const data = {
+  const population = document.getElementById('population').value;
+  const reportedCases = document.getElementById('reported-cases').value;
+  const beds = document.getElementById('beds').value;
+  const timeToElapse = document.getElementById('time-to-elapse').value;
+  const periods = document.getElementById('period').value;
+  const avgI = document.getElementById('average-daily-income').value;
+  const avgIP = document.getElementById('average-daily-income-population').value;
+  const data = {
         region: {
             name: "Africa",
             avgAge: 19.7,
