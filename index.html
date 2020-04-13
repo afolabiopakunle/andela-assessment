@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./src/img/coronavirus.png" type="image/x-icon">
+    <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="./src/css/style.css">
+    <title>COVID-19 Infections Predictor & Estimator</title>
+</head>
+
+<body>
+    <div class="covid-form" id="landing">
+        <h1>COVID-19 Infections <br /><span>Predictor & Estimator</span></h1>
+        <div>
+            <div class="section"><span>1</span>Population</div>
+            <div class="inner-wrap">
+                <input id="population" type="text" data-population name="population" />
+            </div>
+
+            <div class="section"><span>2</span>Time To Elapse</div>
+            <div class="inner-wrap">
+                <input id="time-to-elapse" type="text" data-time-to-elapse name="time-to-elapse" />
+            </div>
+
+            <div class="section"><span>3</span>Reported Cases</div>
+            <div class="inner-wrap">
+                <input id="reported-cases" type="text" data-reported-cases name="reported-cases" />
+            </div>
+
+            <div class="section"><span>4</span>Total Hospital Beds</div>
+            <div class="inner-wrap">
+                <input type="text" id="beds" data-total-hospital-beds name="total-hospital-beds" />
+            </div>
+
+            <div class="section"><span>5</span>Average Daily Income</div>
+            <div class="inner-wrap">
+                <input type="text" id="average-daily-income" data-average-daily-income name="average-daily-income" />
+            </div>
+
+            <div class="section"><span>5</span>Average Daily Income Population</div>
+            <div class="inner-wrap">
+                <input type="text" id="average-daily-income-population" data-average-daily-income-population name="average-daily-income-population" />
+            </div>
+
+            <div class="section"><span>6</span>Period Type</div>
+            <div class="inner-wrap">
+                <select id="period" data-period-type>
+                    <option value="days">Days</option>
+                    <option value="weeks">Weeks</option>
+                    <option value="months">Months</option>
+                </select>
+            </div>
+            <div class="button-section">
+                <input id="submit" type="button" data-go-estimate name="Submit" value="Submit" />
+            </div>
+        </div>
+    </div>
+    <div class="covid-form" id="result" style="display: none;">
+        <h1>COVID-19 Infections <br /><span>Estimates</span></h1>
+        <div>
+            <div class="section"><span>1</span>Currently Infected</div>
+            <div class="inner-wrap">
+                <h2 id="currently-infected"></h2>
+            </div>
+
+            <div class="section"><span>2</span>Infections By Requested Time</div>
+            <div class="inner-wrap">
+                <h2 id="infections-by-requested-time"></h2>
+            </div>
+
+            <div class="section"><span>3</span>Severe Cases By Requested Time</div>
+            <div class="inner-wrap">
+                <h2 id="severe-cases-by-requested-time"></h2>
+            </div>
+
+            <div class="section"><span>4</span>Hospital Beds By Requested Time</div>
+            <div class="inner-wrap">
+                <h2 id="hospital-beds"></h2>
+            </div>
+
+            <div class="section"><span>5</span>Cases For Ventilators By Requested Time</div>
+            <div class="inner-wrap">
+                <h2 id="ventilators"></h2>
+            </div>
+
+            <div class="section"><span>6</span>Cases For ICU By Requested Time</div>
+            <div class="inner-wrap">
+                <h2 id="icu"></h2>
+            </div>
+
+            <div class="section"><span>7</span>Dollars In Flight</div>
+            <div class="inner-wrap">
+                <h2 id="dollars-in-flight"></h2>
+            </div>
+        </div>
+    </div>
+    <script src="./src/estimator.js"></script>
+</body>
+
+</html>
