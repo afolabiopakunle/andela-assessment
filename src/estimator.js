@@ -1,4 +1,45 @@
+/* eslint-disable linebreak-style */
 const submit = document.getElementById('submit');
+
+const covid19ImpactEstimator = (data) => {
+  const {
+    reg, periodType, timeToElapse, reportedCases, population, totalHospitalBeds
+  } = data;
+  let power = timeToElapse / 3;
+  power = Math.floor(power);
+  const impactCurrentlyInfected = reportedCases * 10;
+  const severeImpactCurrentlyInfected = reportedCases * 50;
+  const rt = impactCurrentlyInfected * (2 ** power);
+  const st = severeImpactCurrentlyInfected * (2 ** power);
+  const bedsAvailable = Math.floor(totalHospitalBeds * 0.35);
+  const impact = {
+    currentlyInfected: impactCurrentlyInfected,
+    infectionsByRequestedTime: rt,
+    severeCasesByRequestedTime: rt * 0.15,
+    hospitalBedsByRequestedTime: bedsAvailable - rt * 0.15,
+    casesForVentilatorsByRequestedTime: rt * 0.02,
+    casesForICUByRequestedTime: (rt) * 0.05,
+    dollarsInFlight: ((rt * reg.avgDailyIncomePopulation) * reg.avgDailyIncomeInUSD) * timeToElapse,
+    periodType,
+    population
+  };
+  const severeImpact = {
+    currentlyInfected: severeImpactCurrentlyInfected,
+    infectionsByRequestedTime: st,
+    severeCasesByRequestedTime: st * 0.15,
+    hospitalBedsByRequestedTime: bedsAvailable - st * 0.15,
+    casesForVentilatorsByRequestedTime: st * 0.02,
+    casesForICUByRequestedTime: (st) * 0.05,
+    dollarsInFlight: ((st * reg.avgDailyIncomePopulation) * reg.avgDailyIncomeInUSD) * timeToElapse
+  };
+
+
+  return {
+    data,
+    impact,
+    severeImpact
+  };
+};
 
 submit.addEventListener('click', () => {
   const population = document.getElementById('population').value;
@@ -33,44 +74,4 @@ submit.addEventListener('click', () => {
   document.getElementById('icu').textContent = result.impact.casesForICUByRequestedTime.toLocaleString();
   document.getElementById('dollars-in-flight').textContent = `$ ${result.impact.dollarsInFlight.toLocaleString()}`;
 });
-
-const covid19ImpactEstimator = (data) => {
-  const {
-    region, periodType, timeToElapse, reportedCases, population, totalHospitalBeds
-  } = data;
-  let power = timeToElapse / 3;
-  power = Math.floor(power);
-  const impactCurrentlyInfected = reportedCases * 10;
-  const severeImpactCurrentlyInfected = reportedCases * 50;
-  const rt = impactCurrentlyInfected * (2 ** power);
-  const st = severeImpactCurrentlyInfected * (2 ** power);
-  const bedsAvailable = Math.floor(totalHospitalBeds * 0.35);
-  const impact = {
-    currentlyInfected: impactCurrentlyInfected,
-    infectionsByRequestedTime: rt,
-    severeCasesByRequestedTime: rt * 0.15,
-    hospitalBedsByRequestedTime: bedsAvailable - rt * 0.15,
-    casesForVentilatorsByRequestedTime: rt * 0.02,
-    casesForICUByRequestedTime: (rt) * 0.05,
-    dollarsInFlight: ((rt * region.avgDailyIncomePopulation) * region.avgDailyIncomeInUSD) * timeToElapse,
-    periodType,
-    population
-  };
-  const severeImpact = {
-    currentlyInfected: severeImpactCurrentlyInfected,
-    infectionsByRequestedTime: st,
-    severeCasesByRequestedTime: st * 0.15,
-    hospitalBedsByRequestedTime: bedsAvailable - st * 0.15,
-    casesForVentilatorsByRequestedTime: st * 0.02,
-    casesForICUByRequestedTime: (st) * 0.05,
-    dollarsInFlight: ((st * region.avgDailyIncomePopulation) * region.avgDailyIncomeInUSD) * timeToElapse
-  };
-
-
-  return {
-    data,
-    impact,
-    severeImpact
-  };
-};
 export default covid19ImpactEstimator;
